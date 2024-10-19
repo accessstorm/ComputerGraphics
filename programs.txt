@@ -191,3 +191,61 @@ void main() {
     // Close the graphics mode
     closegraph();
 }
+
+
+
+
+
+
+#include <stdio.h>
+#include <graphics.h>
+#include <conio.h>
+
+void main() {
+    int gd = DETECT, gm;
+    int x, y, x1, y1, x2, y2, p, dx, dy;
+
+    // Initialize the graphics mode
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
+
+    // Input coordinates of the first point
+    printf("\nEnter the x-coordinate of the first point: ");
+    scanf("%d", &x1);
+
+    printf("\nEnter the y-coordinate of the first point: ");
+    scanf("%d", &y1);
+
+    // Input coordinates of the second point
+    printf("\nEnter the x-coordinate of the second point: ");
+    scanf("%d", &x2);
+
+    printf("\nEnter the y-coordinate of the second point: ");
+    scanf("%d", &y2);
+
+    // Set initial points
+    x = x1;
+    y = y1;
+    
+    // Calculate dx and dy
+    dx = x2 - x1;
+    dy = y2 - y1;
+
+    // Bresenham's algorithm
+    p = 2 * dy - dx;
+    
+    while (x <= x2) {
+        putpixel(x, y, YELLOW); // Draw pixel at (x, y)
+
+        if (p < 0) {
+            x = x + 1;
+            p = p + 2 * dy;
+        } else {
+            x = x + 1;
+            y = y + 1;
+            p = p + 2 * dy - 2 * dx;
+        }
+    }
+
+    getch(); // Wait for a key press
+    closegraph(); // Close the graphics mode
+}
